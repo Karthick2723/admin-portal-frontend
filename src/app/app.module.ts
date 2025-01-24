@@ -51,8 +51,6 @@ import { EventRegistrationlistDialogComponent } from './main/event-seminor/event
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClientBranchListComponent } from './main/clients/client-branch-list/client-branch-list.component';
 import { AddClientBranchComponent } from './main/clients/add-client-branch/add-client-branch.component';
-import { AddBannerComponent } from './main/banner/add-banner/add-banner.component';
-import BannerComponent from './main/banner/banner.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CustomEditorImgresizeComponent } from './main/custom-editor-imgresize/custom-editor-imgresize.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -90,8 +88,6 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     EventRegistrationlistDialogComponent,
     ClientBranchListComponent,
     AddClientBranchComponent,
-    BannerComponent,
-    AddBannerComponent,
     CustomEditorImgresizeComponent,
     CustomizeTimepickerComponent,
     PostArticleComponent,

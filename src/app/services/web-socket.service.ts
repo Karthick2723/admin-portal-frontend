@@ -68,12 +68,6 @@ export class WebSocketService {
     }
   }
 
-  sendBanner(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendBanner', body: message });
-    }
-  }
-
   sendProductPublish(message: string) {
     if (this.isConnected) {
       this.stompClient.publish({ destination: '/app/sendProduct', body: message });
