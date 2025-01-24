@@ -4,7 +4,9 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    
+  ],
   imports: [CommonModule, AuthenticationRoutingModule, FormsModule]
 })
 export class AuthenticationModule { }

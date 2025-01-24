@@ -97,6 +97,6 @@ export default class LoginComponent {
   }
 
   navigateToAddPage() {
-    this.route.navigate(['UserManagement/add-Usermanagement']);
+    this.route.navigate(['create-User']);
   }
 }

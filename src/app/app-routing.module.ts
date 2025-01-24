@@ -40,13 +40,22 @@ const routes: Routes = [
         path: 'UserManagement/add-Usermanagement',
         component: AddUsermanagementComponent,
         canActivate: [authGuard]
-      }
+      },
+      { 
+        path: 'create-Usermanagement',
+        component: AddUsermanagementComponent,
+      },
+      
     ]
   },
   {
     path: 'login',
     component: LoginComponent,
 
+  },
+  { 
+    path: 'create-User',
+    component: AddUsermanagementComponent,
   },
   {
     path: '',
