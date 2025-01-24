@@ -85,10 +85,4 @@ export class WebSocketService {
       this.stompClient.publish({ destination: '/app/sendUser', body: message });
     }
   }
-
-  sendArticle(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendArticle', body: message });
-    } 
-  }
 }

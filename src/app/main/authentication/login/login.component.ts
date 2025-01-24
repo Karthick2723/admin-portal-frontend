@@ -6,7 +6,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat';
-import { PostArticleService } from 'src/app/services/post-article.service';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'; // Updated import
 
 @Component({
@@ -25,8 +24,7 @@ export default class LoginComponent {
   authmail: string;
   authPassword: string;
 
-  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth, private postArticleService: PostArticleService
-  ) { }
+  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
     if (this.authService.isAuthorized()) {

@@ -17,8 +17,6 @@ import { AddClientsComponent } from './main/clients/add-clients/add-clients.comp
 import { EventSeminorComponent } from './main/event-seminor/event-seminor.component';
 import { AddEventSeminorComponent } from './main/event-seminor/add-event-seminor/add-event-seminor.component';
 import { AddClientBranchComponent } from './main/clients/add-client-branch/add-client-branch.component';
-import { PostArticleComponent } from './main/post-article/post-article/post-article.component';
-import { PostArticleAddComponent } from './main/post-article/post-article-add/post-article-add.component';
 
 const routes: Routes = [
   {
@@ -103,16 +101,6 @@ const routes: Routes = [
       {
         path: 'add-clientsDivision',
         component: AddClientBranchComponent,
-        canActivate: [authGuard]
-      },
-      {
-        path: 'postarticle',
-        component: PostArticleComponent,
-        canActivate: [authGuard]
-      },
-      {
-        path: 'postarticle/add-article',
-        component: PostArticleAddComponent,
         canActivate: [authGuard]
       }
     ]

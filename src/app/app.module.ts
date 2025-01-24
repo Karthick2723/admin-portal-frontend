@@ -57,8 +57,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CustomizeTimepickerComponent } from './main/customize-timepicker/customize-timepicker.component';
-import { PostArticleComponent } from './main/post-article/post-article/post-article.component';
-import { PostArticleAddComponent } from './main/post-article/post-article-add/post-article-add.component';
 import { CustomEditorComponent } from './main/custom-editor/custom-editor.component';
 import { CustomEditorModule } from './main/custom-editor/custom-editor.module';
 import { AuthInterceptorService } from './services/interceptors/auth-interceptor.service';
@@ -90,8 +88,6 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     AddClientBranchComponent,
     CustomEditorImgresizeComponent,
     CustomizeTimepickerComponent,
-    PostArticleComponent,
-    PostArticleAddComponent
   ],
   imports: [CustomEditorModule, BrowserModule, AppRoutingModule, SharedModule,
     BrowserAnimationsModule, FormsModule,
