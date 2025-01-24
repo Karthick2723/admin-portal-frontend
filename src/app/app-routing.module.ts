@@ -20,6 +20,13 @@ const routes: Routes = [
 
       },
       {
+        path: 'add-Usermanagement',
+        loadComponent: () =>
+          import('../app/main/user-management/user-management.component').then(
+            (m) => m.UserManagementComponent
+          ),
+      },
+      { 
         path: 'dashboard',
         loadComponent: () => import('./main/dashboard/dashboard.component'),
         canActivate: [authGuard]

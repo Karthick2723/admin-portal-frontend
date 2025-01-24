@@ -4,8 +4,8 @@
       <div class="col-lg-6 col-sm-12">
         <div class="pb-2 path">
           <div class="pb-2 path" *ngIf="action !== 'view' && action !== 'edit'">
-            User Management > &nbsp;<span style="display: contents;" class="path-link" (click)="navigateListPage()">
-            </span> Add User
+ &nbsp;<span style="display: contents;" class="path-link" (click)="navigateListPage()">
+            </span>
           </div>
           <div class="pb-2 path" *ngIf="action=='edit'">
             User
@@ -26,8 +26,8 @@
         <div class="btn-box d-flex">
           <button type="submit" (click)="onSubmit()" class="btn btn-primary" style="width: 125px;"
             *ngIf="action !== 'view' && action !== 'edit' && publishbtn==false">Add User </button>
-          <button type="submit" (click)="changeViewtoEdit()" class="btn btn-edit" *ngIf="action=='view'">Edit
-          </button>
+          <!-- <button type="submit" (click)="changeViewtoEdit()" class="btn btn-edit" *ngIf="action=='view'">Edit
+          </button> -->
           <button type="submit" (click)="update()" style="width: 125px;" class="btn btn-primary"
             *ngIf="action=='edit'&& publishbtn==false">Update </button>
           <div style="width: 20px;"></div>

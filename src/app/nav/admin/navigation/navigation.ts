@@ -18,21 +18,6 @@ export interface Navigation extends NavigationItem {
 }
 const NavigationItems = [
   {
-    id: 'dashboard',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Home',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'dashboard',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
     id: 'UserManagement',
     type: 'group',
     icon: 'icon-navigation',

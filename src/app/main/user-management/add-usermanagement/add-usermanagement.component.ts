@@ -55,18 +55,10 @@ export class AddUsermanagementComponent {
     this.activatedRoute.queryParamMap.subscribe(res => {
       this.id = res.get('id');
       this.action = res.get('action');
-      if (this.action == 'view') {
-        this.dataPatchView();
-        this.isEditable = true;
-        this.imgInputclose = false;
-        this.disableForm();
-      }
       if (this.action == 'edit') {
         this.dataPatchView();
         this.imgInputclose = false;
       }
-      this.getProfileImageFileName();
-
     });
   }
 
@@ -87,30 +79,9 @@ export class AddUsermanagementComponent {
     this.originalEmailId = this.UserDeatils.get('emailId').value;
   }
 
-
   isInValidField(formControlName: string): boolean {
     return this.UserDeatils.get(formControlName).invalid && (this.UserDeatils.get(formControlName).dirty ||
       this.UserDeatils.get(formControlName).touched);
-  }
-  convertToBase64(event: any): void {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    this.imgInputclose = false;
-
-    reader.onload = () => {
-      this.base64String = reader.result;
-      this.UserDeatils.get('photoUrl').setValue(this.base64String);
-    };
-
-    reader.readAsDataURL(file);
-  }
-
-  removeImage() {
-    this.base64String = '';
-    const uploadElement = document.getElementById('upload_costum') as HTMLInputElement;
-    if (uploadElement) {
-      uploadElement.value = ''; 
-    }
   }
 
   togglePublished(event: any) {
@@ -236,87 +207,5 @@ export class AddUsermanagementComponent {
     });
     this.imageUrl = this.UserDeatils.value.image
   };
-
-  changeViewtoEdit() {
-    this.action = 'edit';
-    this.enableForm();
-  }
-
-  enableForm() {
-    this.UserDeatils.enable();
-  }
-
-  getProfileImageFileName(): any {
-    if (this.firstNames && this.firstNames.length > 0) {
-      const firstLetterFirstName = this.firstNames?.charAt(0)?.toUpperCase();
-      const fileName = `${firstLetterFirstName}`;
-      console.log(fileName);
-      return fileName;
-    }
-  }
-
-  get getCoverImg() {
-    var img = this.UserDeatils.get('photoUrl');
-    return img.value ? img.value : null;
-  }
-
-  fileChangeEvent(event: any): void {
-    const file = event.target.files[0];
-    const acceptedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    if (file && acceptedFileTypes.includes(file.type)) {
-      this.imageChangedEvent = event;
-      this.modalService.open(this.cropperModal);
-    } else {
-      this.toastr.error('Please select a PNG, JPG, or JPEG image.');
-    }
-  }
-
-  confirmCrop(modal: any): void {
-    this.coverImg = this.croppedImage; 
-    this.UserDeatils.get('photoUrl')?.setValue(this.croppedImage);
-    this.resetFileInput();
-    modal.close();
-  }
-
-  resetFileInput(): void {
-    const input = this.fileInput.nativeElement as HTMLInputElement;
-    input.value = '';
-    this.cdr.detectChanges();
-  }
-
-
-  onImageLoaded(): void {
-    console.log('Image loaded');
-  }
-
-  onCropperReady(): void {
-    console.log('Cropper ready');
-  }
-
-  onLoadImageFailed(): void {
-    console.error('Load failed');
-  }
-
-  onImageCropped(event: ImageCroppedEvent): void {
-    console.log(event);
-    this.convertUrlToBase64(event.objectUrl).then(base64 => {
-      this.croppedImage = base64; 
-      this.UserDeatils.get('photoUrl').setValue(this.croppedImage); 
-    });
-  }
-
-
-  async convertUrlToBase64(url: string): Promise<string> {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result as string);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  }
 
 }
