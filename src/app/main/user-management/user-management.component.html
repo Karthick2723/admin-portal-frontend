@@ -2,9 +2,6 @@
   <div class="card-body ">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <div class="pb-2 path">
-          User Management > List of Users
-        </div>
         <h2>List of Users </h2>
       </div>
       <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
@@ -15,22 +12,6 @@
 </div>
 <div class="row container-fluid movable-content">
   <div class="filterContainer">
-    <div class="filter-row d-flex">
-      <div class=" text-center">
-        <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
-          [ngClass]="{'btn-selected': selectedFilter === 'All'}" (click)="setSelectedFilter('All')"
-          (click)="resetFilter()">All</button>
-      </div>
-      <div class=" text-center mb-2">
-        <button class="btn btn-transparent pubBtn"
-          (click)="filterByStatus('isPublished');setSelectedFilter('isPublished')"
-          [ngClass]="{'btn-selected': selectedFilter === 'isPublished'}">Active ({{publishCount}})</button>
-      </div>
-      <div class=" text-center mb-2">
-        <button class="btn btn-transparent" (click)="filterByStatus('UnPublished');setSelectedFilter('UnPublished')"
-          [ngClass]="{'btn-selected': selectedFilter === 'UnPublished'}">InActive ({{UnpublishCount}})</button>
-      </div>
-    </div>
   </div>
   <div class="col-sm-12  tab_align">
     <div class="card-body table-responsive">
@@ -88,9 +69,6 @@
           <th mat-header-cell *matHeaderCellDef class="custom-header">Action</th>
           <td mat-cell *matCellDef="let element">
             <div class="d-flex ">
-              <div matTooltip="View" (click)="view(element.userId)" style="cursor: pointer;">
-                <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (2).jpg" alt="">
-              </div>
               <div matTooltip="Edit" style="margin-left: 3px;cursor: pointer;" (click)="editItem(element.userId)">
                 <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/editIcon.png" alt="">
               </div>
@@ -102,7 +80,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator ></mat-paginator>
   </div>
   <div class="deleteModel">
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

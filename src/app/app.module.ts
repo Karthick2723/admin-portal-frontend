@@ -22,7 +22,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from "@angular/fire/compat";
 import { HttpService } from './services/http-services';
-import { CategoryService } from './services/category.service';
 import { ToastrModule } from 'ngx-toastr';
 import { API_GATEWAY, environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
@@ -36,7 +35,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -75,7 +73,6 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     MatOptionModule,
     MatDialogModule,
     MatProgressBarModule,
-    NgSelectModule,
     MatTooltipModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -83,7 +80,7 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     FontAwesomeModule,
     AngularEditorModule
   ],
-  providers: [NavigationItem, HttpService, CategoryService,
+  providers: [NavigationItem, HttpService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

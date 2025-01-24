@@ -4,7 +4,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/nav/shared/shared.module';
-import { CommonserviceService } from 'src/app/services/commonservice.service';
 import { UserManageentService } from 'src/app/services/user-manageent.service';
 import { TooltipContent } from 'src/assets/constants/tool-tip-contants';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -28,7 +27,7 @@ export class UserManagementComponent {
   selectedFilter: string = 'All';
   publishCount: number ;
   UnpublishCount: number;
-  constructor( private commonserviceService:CommonserviceService, private route: Router, private userManageService:UserManageentService) { }
+  constructor( private route: Router, private userManageService:UserManageentService) { }
 
   ngOnInit(): void {
     this.getAllData();

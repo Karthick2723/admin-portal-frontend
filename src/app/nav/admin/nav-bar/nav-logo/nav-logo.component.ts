@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-nav-logo',
@@ -18,7 +17,7 @@ export class NavLogoComponent {
   ];
 
   @ViewChild('dropdown') dropdown: ElementRef;
-  constructor(private authService: AuthService, private commonservice: CommonService, private eRef: ElementRef) {
+  constructor(private authService: AuthService, private eRef: ElementRef) {
     this.windowWidth = window.innerWidth;
   }
 
@@ -45,9 +44,6 @@ export class NavLogoComponent {
     this.isOpen = !this.isOpen;
   }
 
-  selectLink(link: string) {
-    this.commonservice.setSelectedLink(link);
-  }
   closeDropdown() {
     this.isOpen = false;
   }

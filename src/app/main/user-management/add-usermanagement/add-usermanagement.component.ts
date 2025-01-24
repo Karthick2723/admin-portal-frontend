@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/nav/shared/shared.module';
-import { CommonserviceService } from 'src/app/services/commonservice.service';
 import { MatSelectModule } from '@angular/material/select';
-import { CategoryService } from 'src/app/services/category.service';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from 'src/app/services/product.service';
-import { CompressImageService } from 'src/app/services/compress-image.service';
 import { take } from 'rxjs';
 import { UserManageentService } from 'src/app/services/user-manageent.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -48,10 +44,9 @@ export class AddUsermanagementComponent {
   isView: boolean = false;
   originalEmailId: string;
 
-  constructor(private fb: FormBuilder, private commonserviceService: CommonserviceService,
-    private activatedRoute: ActivatedRoute, private categroyservice: CategoryService, private router: Router,
-    private toastr: ToastrService, private productService: ProductService,
-    private compressImage: CompressImageService, private UserManageentService: UserManageentService,
+  constructor(private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute, private router: Router,
+    private toastr: ToastrService, private UserManageentService: UserManageentService,
     private modalService: NgbModal, private cdr: ChangeDetectorRef,
     private webSocketService: WebSocketService) { }
 
@@ -251,52 +246,6 @@ export class AddUsermanagementComponent {
 
   enableForm() {
     this.UserDeatils.enable();
-  }
-
-  getClientFile(event: any) {
-    const files: FileList = event.target.files;
-    if (files && files.length > 0) {
-      this.imgInputclose = false;
-      this.productImage = files.item(0);
-      let bytes = this.productImage.size / 1024;
-      let fileType = this.productImage.type;
-      if (
-        fileType == "image/jpg" ||
-        fileType == "image/jpeg" ||
-        fileType == "image/png" ||
-        fileType == "image/gif" ||
-        fileType == "image/apng" ||
-        fileType == "image/avif" ||
-        fileType == "image/svg+xml" ||
-        fileType == "image/webp"
-      ) {
-        if (bytes < 5120) {
-          if (files.length === 0) return;
-          this.compressImage
-            .compress(this.productImage)
-            .pipe(take(2))
-            .subscribe(compressedImage => {
-              this.productImage = compressedImage;
-            });
-
-          var reader = new FileReader();
-          this.imagePath = files;
-          reader.readAsDataURL(files[0]);
-          reader.onload = (_event) => {
-            this.imageURLs = reader.result;
-          };
-        } else {
-          this.toastr.error(
-            'Image size should be lesser than 5 Mb'
-          );
-        }
-      } else {
-        this.toastr.error(
-          'Unsupported media format'
-        );
-        return;
-      }
-    }
   }
 
   getProfileImageFileName(): any {
