@@ -24,7 +24,7 @@ export default class LoginComponent {
   authmail: string;
   authPassword: string;
 
-  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth) { }
+  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth,private route:Router) { }
 
   ngOnInit() {
     if (this.authService.isAuthorized()) {
@@ -94,5 +94,9 @@ export default class LoginComponent {
       this.password = 'password';
       this.show = false;
     }
+  }
+
+  navigateToAddPage() {
+    this.route.navigate(['UserManagement/add-Usermanagement']);
   }
 }

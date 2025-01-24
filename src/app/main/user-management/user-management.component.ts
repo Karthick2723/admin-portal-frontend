@@ -18,7 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 export class UserManagementComponent {
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id', 'Image','First Name','Last Name','Email Id','Organization', 'verified', 'Action'];
+  displayedColumns: string[] = ['id', 'Image','First Name','Last Name','Email Id', 'verified', 'Action'];
   datas:any;
   firstNames:any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

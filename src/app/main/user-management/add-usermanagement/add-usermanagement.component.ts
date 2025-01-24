@@ -80,9 +80,7 @@ export class AddUsermanagementComponent {
       photoUrl: [''],
       phoneNbr: ['', [Validators.required, Validators.pattern(/^\+91\d{10}$/)]],
       emailId: ['', [Validators.required, Validators.email]],
-      clientName: ['', [Validators.required, Validators.maxLength(50)]],
       password: [''],
-      address: ['', [Validators.required, Validators.maxLength(150)]],
       status: ['Active'],
       id: [0]
     });

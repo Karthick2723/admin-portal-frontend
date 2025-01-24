@@ -8,6 +8,10 @@ const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./login/login.component')
+      },
+      {
+        path:'SignUp',
+        loadComponent: () => import('../user-management/user-management.component').then(m=>m.UserManagementComponent)
       }
     ]
   }

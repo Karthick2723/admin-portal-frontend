@@ -64,7 +64,11 @@
                 <button type="submit" class="button" [disabled]="adminSignInForm.invalid || isSubmitting">Sign
                   In</button>
               </div>
-              <br>
+              <div class="d-flex mt-1 justify-content-between">
+                <h5 class="text-secondary">
+                  <a (click)="navigateToAddPage()">Sign Up</a>
+                </h5>
+              </div>              <br>
               <br>
               <div class="register">
                 <h5 class="d-flex">
