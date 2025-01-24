@@ -44,45 +44,10 @@ export class WebSocketService {
     this.stompClient.activate();
   }
 
-  sendProduct(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendProduct', body: message });
-    }
-  }
-
-  sendCategory(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendCategory', body: message });
-    }
-  }
-
-  sendEvent(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendEvent', body: message });
-    }
-  }
-
   sendUser(message: string) {
     if (this.isConnected) {
       this.stompClient.publish({ destination: '/app/sendUser', body: message });
     }
   }
 
-  sendProductPublish(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendProduct', body: message });
-    }
-  }
-
-  sendEventPublish(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendEvent', body: message });
-    }
-  }
-
-  sendUserEmailChange(message: string) {
-    if (this.isConnected) {
-      this.stompClient.publish({ destination: '/app/sendUser', body: message });
-    }
-  }
 }

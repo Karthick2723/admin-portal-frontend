@@ -21,15 +21,10 @@ import { SharedModule } from './nav/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from "@angular/fire/compat";
-import { ProductModule } from './main/Product/Product.module';
-import { AccountHttpInterceptor, HttpService } from './services/http-services';
-import { ProductService } from './services/product.service';
+import { HttpService } from './services/http-services';
 import { CategoryService } from './services/category.service';
 import { ToastrModule } from 'ngx-toastr';
-import { LineOfbussinessComponent } from './main/line-ofbussiness/line-ofbussiness.component';
-import { AddLineofbusinessComponent } from './main/line-ofbussiness/add-lineofbusiness/add-lineofbusiness.component';
 import { API_GATEWAY, environment } from 'src/environments/environment';
-import { OrdersComponent } from './main/orders/orders.component';
 import { RouterModule } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -39,26 +34,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { OrdersDilogComponent } from './main/orders/orders-dilog/orders-dilog.component';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ClientsComponent } from './main/clients/clients.component';
-import { AddClientsComponent } from './main/clients/add-clients/add-clients.component';
-import { EventSeminorComponent } from './main/event-seminor/event-seminor.component';
-import { AddEventSeminorComponent } from './main/event-seminor/add-event-seminor/add-event-seminor.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { EventRegistrationlistDialogComponent } from './main/event-seminor/event-registrationlist-dialog/event-registrationlist-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ClientBranchListComponent } from './main/clients/client-branch-list/client-branch-list.component';
-import { AddClientBranchComponent } from './main/clients/add-client-branch/add-client-branch.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { CustomEditorImgresizeComponent } from './main/custom-editor-imgresize/custom-editor-imgresize.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { CustomizeTimepickerComponent } from './main/customize-timepicker/customize-timepicker.component';
-import { CustomEditorComponent } from './main/custom-editor/custom-editor.component';
-import { CustomEditorModule } from './main/custom-editor/custom-editor.module';
 import { AuthInterceptorService } from './services/interceptors/auth-interceptor.service';
 
 
@@ -77,24 +60,12 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     NavCollapseComponent,
     ConfigurationComponent,
     GuestComponent,
-    OrdersComponent,
-    OrdersDilogComponent,
-    ClientsComponent,
-    AddClientsComponent,
-    EventSeminorComponent,
-    AddEventSeminorComponent,
-    EventRegistrationlistDialogComponent,
-    ClientBranchListComponent,
-    AddClientBranchComponent,
-    CustomEditorImgresizeComponent,
-    CustomizeTimepickerComponent,
   ],
-  imports: [CustomEditorModule, BrowserModule, AppRoutingModule, SharedModule,
+  imports: [ BrowserModule, AppRoutingModule, SharedModule,
     BrowserAnimationsModule, FormsModule,
     HttpClientModule, RouterModule,
     MatPaginatorModule,
-    MatTableModule,
-    ProductModule, ToastrModule.forRoot(),
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(API_GATEWAY.firebase),
     MatCheckboxModule,
     MatFormFieldModule,
@@ -112,7 +83,7 @@ import { AuthInterceptorService } from './services/interceptors/auth-interceptor
     FontAwesomeModule,
     AngularEditorModule
   ],
-  providers: [NavigationItem, HttpService, ProductService, CategoryService,
+  providers: [NavigationItem, HttpService, CategoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
