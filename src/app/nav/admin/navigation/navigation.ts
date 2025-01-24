@@ -33,36 +33,6 @@ const NavigationItems = [
     ]
   },
   {
-    id: 'Category',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Category',
-        title: 'Services / Technologies',
-        type: 'item',
-        url: '/services&technologies',
-        classes: 'nav-item',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'orders',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'orders',
-        title: 'Orders',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'orders',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
     id: 'UserManagement',
     type: 'group',
     icon: 'icon-navigation',
@@ -75,69 +45,6 @@ const NavigationItems = [
         url: 'UserManagement',
         breadcrumbs: false
       },
-    ]
-  },
-  {
-    id: 'eventsSeminar',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'events',
-        title: 'Events',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'events',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'clients',
-    title: 'Dashboard',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'clients',
-        title: 'Clients',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'clients',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'postarticle',
-    title: 'Post/Article',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'postarticle',
-        title: 'Post/Article',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'postarticle',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'banner',
-    title: 'Dashboard',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'banner',
-        title: 'Personalization',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'banner',
-        breadcrumbs: false
-      }
     ]
   }
 ];

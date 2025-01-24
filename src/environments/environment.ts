@@ -5,6 +5,7 @@ export const environment = {
 };
 export const API_GATEWAY = {
     SERVER: 'http://localhost:8080/api',
+    WEBSOCKET_SERVER: 'http://localhost:8080/ws',
     ACCESS_TOKEN_KEY: "access_token",
     USER_INFORMATION: "user_information",
     ROLES: "roles",
