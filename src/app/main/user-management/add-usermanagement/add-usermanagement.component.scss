@@ -7,7 +7,7 @@
 }
 
 .invalid-feedback {
-  color: #dc3545;
+  color: #000000;
   display: block;
 }
 
@@ -86,7 +86,7 @@ path {
 }
 
 .drag-area-img {
-  border: 1px dashed #ea140e !important;
+  border: 1px dashed #000000 !important;
 }
 
 .drag-area .drag_text {
@@ -161,7 +161,7 @@ svg {
 
 
 .letter {
-  background: #d7181f;
+  background: #000000;
   color: white;
   height: 180px;
   display: flex;

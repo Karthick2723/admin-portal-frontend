@@ -119,6 +119,6 @@ export class BreadcrumbComponent {
       }
     });
     this.navigationList = result;
-    this.titleService.setTitle(title + ' | Solize-Admin');
+    this.titleService.setTitle(title + ' | Rubix-Admin');
   }
 }

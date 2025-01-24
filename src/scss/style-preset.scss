@@ -65,7 +65,7 @@
           &.active,
           &.coded-trigger {
             > a {
-            background: #D7181F;
+            background: #000000;
              color: #fff;
             }
           }
@@ -73,7 +73,7 @@
         app-nav-item > li.nav-item:hover,
         > app-nav-group > app-nav-collapse > li:hover {
           > a {
-          background: #D7181F;
+          background: #000000;
           color: #fff;
           }
         }
