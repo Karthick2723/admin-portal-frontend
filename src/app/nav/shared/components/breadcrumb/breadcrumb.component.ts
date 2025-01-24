@@ -38,7 +38,7 @@ export class BreadcrumbComponent {
 
   filterNavigation(activeLink: any) {
     let result: any;
-    let title = 'Welcome';
+    let title = '';
     this.navigation.forEach(function (a: any) {
       if (a.type === 'item' && 'url' in a && a.url === activeLink) {
         result = [

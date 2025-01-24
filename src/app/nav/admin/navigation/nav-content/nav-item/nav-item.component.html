@@ -1,5 +1,5 @@
 <li [ngClass]="item.classes!" *ngIf="item.url && !item.external" [routerLinkActive]="['active']">
-  <a class="nav-link" [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]"
+  <a class="nav-link" [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" style="background-color: #656565;color:#fff"
     (click)="closeOtherMenu($event);navCollapse()">
     <span *ngIf="item.icon" class="coded-micon"><i [ngClass]="item.icon"></i></span>
     <span class="coded-mtext" *ngIf="item.icon; else directTitle">{{ item.title }}</span>
