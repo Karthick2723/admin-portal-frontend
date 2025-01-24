@@ -1,0 +1,154 @@
+<form [formGroup]="bannerForm">
+    <div class="card rounded-0 fixed-row">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="pb-2 path" *ngIf="!isView && !isEdit">
+                        Personalization > &nbsp; <span style="display: contents;" class="path-link"
+                            (click)="navigateToBanners()">List of Personalization</span> > Add Personalization
+                    </div>
+                    <div class="pb-2 path" *ngIf="isView">
+                        Personalization > &nbsp; <span style="display: contents;" class="path-link"
+                            (click)="navigateToBanners()">List of
+                            Personalization</span> >
+                        View Personalization
+                    </div>
+                    <div class="pb-2 path" *ngIf="isEdit">
+                        Personalization > &nbsp;<span style="display: contents;" class="path-link"
+                            (click)="navigateToBanners()">List of
+                            Personalization</span> >
+                        Update Personalization
+                    </div>
+                    <div>
+                        <h2 *ngIf="!isView && !isEdit">Add Personalization</h2>
+                        <h2 *ngIf="isView">View Personalization</h2>
+                        <h2 *ngIf="isEdit">Edit Personalization</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+                    <div class="btn-toolbar flex-column flex-md-row" role="toolbar"
+                        aria-label="Toolbar with button groups">
+                        <div class="btn-group mb-2 mb-md-0 mr-md-2" role="group" aria-label="First group">
+                            <button type="button" *ngIf="isAdd" class="submit-btn position-relative"
+                                (click)="onSubmit()" [disabled]="submit || formSubmitted">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                    *ngIf="submit"></span>
+                                Add
+                            </button>
+                            <button type="button" class="edit-btn" *ngIf="isView"
+                                (click)="changeViewtoEdit()">Edit</button>
+                            <button type="button" *ngIf="isEdit" class="submit-btn position-relative"
+                                (click)="onUpdate()" [disabled]="update || formUpdated">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                    *ngIf="update"></span>
+                                Update
+                            </button>
+                        </div>
+                        <div class="btn-group mb-2 mb-md-0" role="group" aria-label="Second group">
+                            <div *ngIf="isAdd || isEdit;else back_button">
+                                <button type="button" class="discard-btn" (click)="discard()">Discard</button>
+                            </div>
+                            <ng-template #back_button>
+                                <button type="button" class="discard-btn" (click)="navigateListPage()">Back</button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="movable-content">
+        <div class="col col-Mobilepadding">
+            <div class="card  rounded-0 ">
+                <div class="card-body">
+                    <h5 class="card-title pb-2 font-weight-bold">Basic Details</h5>
+                    <div class="container" style="border: 1px solid #6A6B6C33; padding: 10px 0px 10px 0px;">
+                        <div class="form-group d-flex m-0">
+                            <div class="justify-content-between col-12">
+                                <label class="form-label d-flex justify-content-between align-items-center">
+                                    <span><b>Display Title </b><span class="text-danger">*</span></span>
+                                    <span class="text-end">{{ bannerContent.value.length }} /
+                                        {{inputBannerTextMaxLength}}</span>
+                                </label>
+                                <textarea class="form-control" rows="3" #bannerContent formControlName="bannerContent"
+                                    placeholder='"we support you to engineer your vision into your reality"'
+                                    (input)="setBannerContentToFg(bannerContent.value)" required
+                                    [minlength]="inputBannerTextMinLength" [maxlength]="inputBannerTextMaxLength"
+                                    [class.is-invalid]="isInValidField('bannerContent')" [ngClass]="{
+                                  'placeholder-bg': !bannerContent.value,
+                                  'typed-bg': bannerContent.value
+                                }" style="height: 100px; border-radius: 0px;"></textarea>
+
+                                <div *ngIf="isInValidField('bannerContent')" class="invalid-feedback">
+                                    <div *ngIf="bannerForm.get('bannerContent')?.errors?.['minlength']">
+                                        {{ minLenBannerValidationText }}
+                                    </div>
+                                    <div *ngIf="bannerForm.get('bannerContent')?.errors?.['maxlength']">
+                                        {{ maxLenBannerValidationText }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-Mobilepadding">
+            <div class="card h-100  rounded-0 ">
+                <div class="card-body">
+                    <h5 class="card-title pb-2 font-weight-bold">Cover Image <span class="text-danger">*</span></h5>
+                    <div class="cover-img-div">
+                        <div class="d-flex justify-content-center">
+                            <div class="drag-area" [class.is-invalid]="isInValidField('bannerImage')">
+                                <input (change)="fileChangeEvent($event)" #fileInput 
+                                    type="file" class="upload_hide" id="upload_coverImg">
+                                <label for="upload_coverImg" class="upload_label">
+                                    <div class="image" >
+                                        <img class="cover-image" [class.img-disable]="isView" [src]="getBannerImg"
+                                            *ngIf="getBannerImg!=null" alt="Selected Cover Image"
+                                            style="height: 375px; width: 100%;">
+                                        <div class="overlay" *ngIf="getBannerImg!=null"></div>
+                                        <div *ngIf="getBannerImg==null" class="m-5">
+                                            <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (3).jpg"
+                                                alt="Placeholder Image">
+                                            <p class="choose_file"><a><br><b>Click to browse</b></a></p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #cropperModal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Crop Image</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="cropper-container">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [resizeToWidth]="2100" [aspectRatio]="6100 / 1700" format="png" (imageCropped)="onImageCropped($event)"
+                        (cropperReady)="onCropperReady()" (loadImageFailed)="onLoadImageFailed()">
+                    </image-cropper>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="confirmCrop(modal)">Crop & Save</button>
+            </div>
+        </ng-template>
+        <div class="col-12 d-flex justify-content-end col-Mobilepadding">
+            <div class="card active-div w-50  rounded-0 ">
+                <div class="form-group d-flex align-items-center">
+                    <input type="checkbox" class="me-2" id="statusCheckbox" formControlName="status">
+                    <label class="form-label ms-2 mb-0 font-weight-bold" for="statusCheckbox">Active</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

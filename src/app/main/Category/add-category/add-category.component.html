@@ -1,0 +1,194 @@
+<form [formGroup]="addCategory">
+  <div class="card rounded-0 fixed-row">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="pb-2 path" *ngIf="action !== 'views' && action !== 'edits'">
+            {{breadCrums}} > &nbsp;<div style="display: contents;" class="path-link" (click)="navigateToListpage()">
+              List of Services /
+              Technologies </div> > Add Service / Technology
+          </div>
+          <div class="pb-2 path" *ngIf="action=='edits'">
+            {{breadCrums}} > &nbsp;<div style="display: contents;" class="path-link" (click)="navigateToListpage()">
+              List of Services /
+              Technologies </div> > Edit Service / Technology
+          </div>
+          <div class="pb-2 path" *ngIf="action=='views'">
+            {{breadCrums}} ><div style="display: contents;" class="path-link" (click)="navigateToListpage()"> List of
+              Services / Technologies
+            </div> > View Service / Technology
+          </div>
+          <div>
+            <h2 *ngIf="action !== 'views' && action !== 'edits'">{{addPageTitle}}</h2>
+            <h2 *ngIf="action=='edits'">{{editPageTitle}}</h2>
+            <h2 *ngIf="action=='views'">{{viewPageTitle}}</h2>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+          <div class="btn-toolbar flex-column flex-md-row" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mb-2 mb-md-0 mr-md-2" role="group" aria-label="First group">
+              <button type="button" *ngIf="action !== 'views' && action !== 'edits' && publishbtn==false"
+                class="submit-btn position-relative" (click)="onSubmit()" [disabled]="submitLoader">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                  *ngIf="submitLoader"></span>
+                Add
+              </button>
+              <button type="button" (click)="changeViewtoEdit()" class="edit-btn" *ngIf="action=='views'">Edit</button>
+              <button type="button" (click)="update()" class="submit-btn" *ngIf="action=='edits'&& publishbtn==false"
+                [disabled]="submitLoader">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                  *ngIf="submitLoader"></span>
+                Update
+              </button>
+            </div>
+            <div class="btn-group mb-2 mb-md-0" role="group" aria-label="Second group">
+              <button type="button" class="discard-btn" (click)="navigateToListpage()">{{action ==
+                'views'?'Back':'Discard'}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row container-fluid movable-content mx-auto p-0">
+    <div class="col-sm-6 col-Mobilepadding">
+      <div class="card rounded-0">
+        <div class="card-body">
+          <h5 class="card-title">Services / Technologies Details</h5>
+          <div class="container p-2" style="border: 1px solid #6A6B6C33; padding: 10px 0px 10px 0px;">
+            <div class="form-group">
+              <label for="categoryName">Services / Technologies Name <span class="text-danger">*</span></label>
+              <input type="text" class="w-100 form-control" id="categoryName" formControlName="categoryName"
+                [ngClass]="{'is-invalid': addCategory.get('categoryName').invalid && (addCategory.get('categoryName').dirty || addCategory.get('categoryName').touched)}">
+              <div
+                *ngIf="addCategory.get('categoryName').invalid && (addCategory.get('categoryName').dirty || addCategory.get('categoryName').touched)"
+                class="invalid-feedback">
+                <i class="fa fa-exclamation-circle"></i>
+                <ng-container *ngIf="addCategory.get('categoryName').hasError('required')">
+                  Services / Technologies Name is required
+                </ng-container>
+                <ng-container *ngIf="addCategory.get('categoryName').hasError('maxlength')">
+                  Services / Technologies Name cannot exceed 100 characters
+                </ng-container>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="d-flex justify-content-between mt-3">
+                <label for="categoryShortDesc">Short Description <span class="text-danger">*</span></label>
+                <p>{{shortDesLen}}/250</p>
+              </div>
+              <textarea maxlength="250" id="categoryShortDesc" class="w-100 form-control"
+                formControlName="categoryShortDesc" name="w3review" rows="4" cols="50"
+                style="border: 1px solid #6A6B6C33"
+                [ngClass]="{'is-invalid-textArea': addCategory.get('categoryShortDesc').invalid && (addCategory.get('categoryShortDesc').dirty || addCategory.get('categoryShortDesc').touched)}"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vendor_card" style="margin-top: 10px;">
+        <div class="card rounded-0">
+          <div class="card-body">
+            <h5 class="card-title">Partner Details</h5>
+            <div class="container p-2" style="border: 1px solid #6A6B6C33; padding: 10px 0px 10px 0px;">
+              <div class="form-group">
+                <label for="vendors">Partner Name <span class="text-danger">*</span></label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-select placeholder="Select items" formControlName="vendors" multiple
+                    [ngClass]="{'is-invalid': isInValidField('vendors')}" required>
+                    <mat-option *ngFor="let vendor of vendorNames" [value]="vendor.vendorId">
+                      {{ vendor.vendorName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <ng-container *ngIf="addCategory.get('vendors')?.touched || addCategory.get('vendors')?.dirty">
+                  <mat-error *ngIf="isInValidField('vendors')">
+                    <div *ngIf="addCategory.get('vendors')?.errors?.['required']">
+                      Partner Name is required
+                    </div>
+                  </mat-error>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-Mobilepadding">
+      <div class="card rounded-0" style="height: 350px;">
+        <div class="card-body">
+          <h5 class="card-title" style="margin-bottom: 25px;">
+            Services / Technologies Image <span class="text-danger">*</span>
+          </h5>
+          <div class="cover-img-div">
+            <div class="d-flex justify-content-center">
+              <div class="drag-area" [class.is-invalid]="isInValidField('categoryImage')">
+                <input (change)="fileChangeEvent($event)" #fileInput type="file" class="upload_hide"
+                  id="upload_coverImg" [disabled]="isView" />
+                <label for="upload_coverImg" class="upload_label">
+                  <div class="image" [ngClass]="{'placeholder-content': !addCategory.get('categoryImage').value}">
+                    <img class="cover-image" [class.img-disable]="isView" [src]="addCategory.get('categoryImage').value"
+                      *ngIf="addCategory.get('categoryImage').value" alt="Selected Cover Image"
+                      style="height: 163.2px; width:300px;" />
+                    <div class="overlay" *ngIf="addCategory.get('categoryImage').value"></div>
+                    <div *ngIf="!addCategory.get('categoryImageForView').value" class="m-5">
+                      <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (3).jpg"
+                        alt="Placeholder Image" />
+                      <p class="choose_file">
+                        <a><br><b>Click to browse</b></a>
+                      </p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #cropperModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Crop Image</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="cropper-container">
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+              [aspectRatio]="300/ 163.2" format="png" (imageCropped)="onImageCropped($event)"
+              (cropperReady)="onCropperReady()" (loadImageFailed)="onLoadImageFailed()">
+            </image-cropper>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="confirmCrop(modal)">Crop & Save</button>
+        </div>
+      </ng-template>
+      <div class="card rounded-0">
+        <div class="card-body" style="padding: 18px 0 0 25px">
+          <label class="radio-inline mr-3">
+            <input type="checkbox" formControlName="isPublished" (change)="togglePublished($event)"> Is Published
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="head_tag" *ngIf="action!==null">
+      <app-Product [ServiceOrTechnologyId]="id" [ngClass]="{'disabled':isEditable}"></app-Product>
+    </div>
+  </div>
+
+
+
+</form>

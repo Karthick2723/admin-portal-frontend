@@ -1,0 +1,48 @@
+.toptext {
+  display: flex;
+  align-items: center;
+}
+
+.coverimg {
+  height: 50px;
+  width: 75px;
+  border-radius: 0px;
+  box-shadow: none !important;
+  border-radius: 10px;
+}
+
+.modal-body {
+  background-color: white !important;
+}
+
+.modal-content {
+  border-radius: 0px !important;
+}
+
+.img-fixed-size {
+  height: 60px;
+  width: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.addbtn-theme {
+  background-color: #D7181F;
+  border-radius: 10px;
+  color: white;
+  height: 40px;
+  width: 125px;
+}
+
+.pointer {
+  cursor: pointer;
+  color: blue;
+}
+
+.no-box-shadow {
+  box-shadow: none;
+}
+
+.no-data {
+  background-color: white;
+}

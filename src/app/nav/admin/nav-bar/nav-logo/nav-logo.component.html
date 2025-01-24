@@ -1,0 +1,25 @@
+<div class="m-header">
+  <div class="d-flex">
+    <div style="padding-top: 18px;">
+      <a [routerLink]="['/default/']" class="b-brand">
+        <img class="logo" src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/solize home page logo.png"
+          alt="" class="logo logo-lg" />
+      </a>
+    </div>
+    <div class="pc-h-item">
+      <a href="javascript:" class="pc-head-link head-link-secondary m-0 mobile-menu" [ngClass]="{ on: navCollapsed }"
+        id="sidebar-hide mobile-collapse" (click)="navCollapse()">
+        <i class="ti ti-menu-2"></i>
+      </a>
+    </div>
+  </div>
+  <div class="logOut_img" #dropdown (click)="closeDropdown()">
+    <div class="avatar-text avatar" height="45" width="45" (click)="toggleProfileDropdown($event)">
+      {{getProfileImageFileName()}} </div>
+    <div class="logOutIcon linklogo" style="cursor: pointer;">
+      <img (click)="handleLinkClick()"
+        src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/logOutImgae.png" alt="">
+      <span class="tooltiptext">LogOut</span>
+    </div>
+  </div>
+</div>

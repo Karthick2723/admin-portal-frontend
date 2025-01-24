@@ -1,0 +1,66 @@
+path {
+    color: #8B8B8B;
+}
+
+.edit_icon {
+    margin-bottom: 07px;
+    margin-left: -12px;
+}
+
+#imagetable {
+    width: 44px !important;
+    height: 50px;
+}
+
+@media only screen and (max-width: 420px) {
+    .edit_icon {
+        margin-bottom: 8px;
+        margin-left: -13px;
+    }
+}
+
+.modal-body {
+    height: 150px;
+    background-color: #D7181F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body>img {
+    height: 75px;
+    width: 60px;
+}
+
+.modal-footer {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid #D7181F;
+
+}
+
+.two_btn {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    position: relative;
+}
+
+.two_btn>button {
+    width: 140px;
+}
+
+.letter {
+    background: #d7181f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 29px;
+    width: 44px !important;
+    height: 50px;
+    border-radius: 50%;
+}

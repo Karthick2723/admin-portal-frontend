@@ -1,0 +1,114 @@
+<div class="mt-4">
+  <div data-toggle="collapse" (click)="toggleCollapse()" aria-expanded="false" aria-controls="collapseExample">
+    <div class="card p-3">
+      <div class="row align-items-center">
+        <div class="col-sm-12">
+          <div class="d-flex justify-content-between mobileFlex">
+            <div class="d-flex mobileFlex">
+              <h2>List of Solutions </h2>
+              <p class="mobileFlexPara"
+                style="transform: translateY(9px); opacity: 0.4;padding-left: 10px; font-size: 12px;">
+                {{categoryName}}
+              </p>
+            </div>
+            <div class="d-flex mobileDesignSet">
+              <button (click)="navigateAddPage()" class="submit-btn">+ Add Solution</button>
+              <div class="spacer" style="width: 25px;"></div>
+              <div class="arrow_img d-flex justify-content-center align-items-center">
+                <img *ngIf="isCollapsed"
+                  src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/circle-up-arrow-icon.png">
+                <img *ngIf="!isCollapsed"
+                  src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/circle-down-arrow-icon.png"
+                  alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collapse" [class.show]="isCollapsed" id="collapseExample">
+    <div class="filterContainer">
+      <div class="filter-row d-flex">
+        <div class=" text-center">
+          <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
+            [ngClass]="{'btn-selected': selectedFilter === 'All'}" (click)="setSelectedFilter('All')"
+            (click)="resetFilter()">All</button>
+        </div>
+        <div class=" text-center mb-2">
+          <button class="btn btn-transparent pubBtn"
+            (click)="filterByStatus('isPublished');setSelectedFilter('isPublished')"
+            [ngClass]="{'btn-selected': selectedFilter === 'isPublished'}">Published ({{publishCount}})</button>
+        </div>
+        <div class=" text-center mb-2">
+          <button class="btn btn-transparent" (click)="filterByStatus('UnPublished');setSelectedFilter('UnPublished')"
+            [ngClass]="{'btn-selected': selectedFilter === 'UnPublished'}">UnPublished ({{UnpublishCount}})</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body table-responsive overflow-hidden">
+      <div class="row">
+        <div class="col-sm-12 tab_align">
+          <div class="card-body table-responsive">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>S.No </th>
+                <td mat-cell *matCellDef="let element; let i = index">{{ getSerialNumber(i) }} </td>
+              </ng-container>
+              <ng-container matColumnDef="productImage">
+                <th mat-header-cell *matHeaderCellDef> Image </th>
+                <td mat-cell *matCellDef="let element">
+                  <img [src]="element.productImage" alt="Image" height="40" id="imagetable"
+                    style="border-radius: 10px;">
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Product Name">
+                <th mat-header-cell *matHeaderCellDef> Solutions Name </th>
+                <td mat-cell *matCellDef="let element">{{element.productName}}</td>
+              </ng-container>
+              <ng-container matColumnDef="productCode">
+                <th mat-header-cell *matHeaderCellDef> Solutions Code </th>
+                <td mat-cell *matCellDef="let element"> {{element.productCode}} </td>
+              </ng-container>
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef> Category </th>
+                <td mat-cell *matCellDef="let element"> {{element.category.categoryName}} </td>
+              </ng-container>
+              <ng-container matColumnDef="is_published">
+                <th mat-header-cell *matHeaderCellDef class="custom-header text-center">is Published</th>
+                <td mat-cell *matCellDef="let element" class="custom-cell text-center">
+                  <div *ngIf="element.isPublished">
+                    <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/tick.jpg" alt=""
+                      matTooltip="Published">
+                  </div>
+                  <div *ngIf="!element.isPublished">
+                    <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/waiting.jpg" alt=""
+                      matTooltip="UnPublished">
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Action</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="d-flex">
+                    <div (click)="view(element.productId)" style="cursor: pointer;">
+                      <img matTooltip="View"
+                        src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (2).jpg" alt="">
+                    </div>
+                    <div (click)="editItem(element.productId)" style="margin-left: 13px;cursor: pointer;">
+                      <img matTooltip="Edit"
+                        src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/editIcon.png">
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+              <tr style="background-color: #F3F4F5;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

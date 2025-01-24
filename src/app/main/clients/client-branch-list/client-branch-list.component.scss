@@ -1,0 +1,15 @@
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+@media screen and (max-width:992px) {
+  .mobileDesigns {
+    display: flex !important;
+    flex-direction: row !important;
+    margin-top: 18px !important;
+    justify-content: space-between !important;
+  }
+
+}

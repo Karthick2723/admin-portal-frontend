@@ -1,0 +1,106 @@
+<div class="container-fluid mt-4">
+  <div data-toggle="collapse" class="" (click)="toggleCollapse()" aria-expanded="false" aria-controls="collapseExample">
+    <div class="card p-3">
+      <div class="row align-items-center">
+        <div class="col-md">
+          <h4 class="mb-0">List Of Client Branches</h4>
+        </div>
+        <div class="col-md-auto d-flex justify-content-end align-items-center mobileDesigns">
+          <button class="submit-btn mr-2 mb-2 mb-md-0" (click)="openModal(null, 'create', clientId, null)">Add
+            Branch</button>
+          <div class="d-flex align-items-center">
+            <img *ngIf="isCollapsed" src="../../../../assets/images/circle-up-arrow-icon.png"
+              src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/circle-up-arrow-icon.png">
+            <img *ngIf="!isCollapsed"
+              src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/circle-down-arrow-icon.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collapse " [class.show]="isCollapsed" id="collapseExample">
+    <div class="filterContainer">
+      <div class="filter-row d-flex">
+        <div class=" text-center">
+          <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
+            [ngClass]="{'btn-selected': selectedFilter === 'All'}" (click)="setSelectedFilter('All')"
+            (click)="resetFilter()">All</button>
+        </div>
+        <div class=" text-center mb-2">
+          <button class="btn btn-transparent pubBtn"
+            (click)="filterByStatus('isPublished');setSelectedFilter('isPublished')"
+            [ngClass]="{'btn-selected': selectedFilter === 'isPublished'}">Active ({{publishCount}})</button>
+        </div>
+        <div class=" text-center mb-2">
+          <button class="btn btn-transparent" (click)="filterByStatus('UnPublished');setSelectedFilter('UnPublished')"
+            [ngClass]="{'btn-selected': selectedFilter === 'UnPublished'}">InActive ({{UnpublishCount}})</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body table-responsive overflow-hidden">
+      <div class="row">
+        <div class="col-sm-12  tab_align">
+          <table class="" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="sNo">
+              <th mat-header-cell *matHeaderCellDef>S.No </th>
+              <td mat-cell *matCellDef="let element; let i=index">
+                {{ getSerialNumber(i) }} </td>
+            </ng-container>
+            <ng-container matColumnDef="branchName">
+              <th mat-header-cell *matHeaderCellDef> Branch Name </th>
+              <td mat-cell *matCellDef="let element" class="truncate-text">
+                {{element.divisionName}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="contactPerson">
+              <th mat-header-cell *matHeaderCellDef> Contact Person </th>
+              <td mat-cell *matCellDef="let element" class="truncate-text">{{element.contactPerson}}</td>
+            </ng-container>
+            <ng-container matColumnDef="emailId">
+              <th mat-header-cell *matHeaderCellDef> Mail Id </th>
+              <td mat-cell *matCellDef="let element" class="truncate-text"> {{element.emailId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="custom-header">Status</th>
+              <td mat-cell *matCellDef="let element" class="custom-cell">
+                <div *ngIf="element.status=='true'">
+                  <button class="active-status" matTooltip="Active">Active</button>
+                </div>
+                <div *ngIf="element.status=='false'">
+                  <button class="in-active-status" matTooltip="InActive">InActive</button>
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="custom-header">Action</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex">
+                  <div style="cursor: pointer;" matTooltip="View"
+                    (click)="openModal(null, 'Edit', clientId, element?.clientDivisionId)">
+                    <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (2).jpg" alt="">
+                  </div>
+                  <div matTooltip="Edit" (click)="openModal(null, 'Update', clientId, element?.clientDivisionId)"
+                    style="margin-left: 13px;cursor: pointer;">
+                    <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/editIcon.png" alt="">
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+            <tr style="background-color: #F3F4F5;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <div *ngIf="dataSource">
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </div>
+          </table>
+          <div *ngIf="!dataSource" class="w-100 d-flex justify-content-center no-data">
+            <tr>
+              <td colspan="8" class="text-right pt-4">
+                <p class="font-weight-light">No Data</p>
+              </td>
+            </tr>
+          </div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+
+<form (ngSubmit)="authLogin()" #adminSignInForm="ngForm">
+  <div class="auth-main">
+    <div class="auth-wrapper v3 ">
+      <div class="auth-form">
+        <div class="background-img">
+          <div class="card my-5 container-fluid">
+            <div class="card-body">
+              <div class="background-image"></div>
+              <a href="#" class="d-flex justify-content-center">
+              </a>
+              <div class="frame468" style="display: none;">
+                <div class="log_main1">
+                </div>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="omrs-input-group">
+                <label class="omrs-input-underlined">
+                  <div class="inputField2">
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M19.5556 18.6667H2.44444V2.33333H19.5556M19.5556 0H2.44444C1.79614 0 1.17438 0.245833 0.715961 0.683417C0.257539 1.121 0 1.71449 0 2.33333V18.6667C0 19.2855 0.257539 19.879 0.715961 20.3166C1.17438 20.7542 1.79614 21 2.44444 21H19.5556C20.2039 21 20.8256 20.7542 21.284 20.3166C21.7425 19.879 22 19.2855 22 18.6667V2.33333C22 1.71449 21.7425 1.121 21.284 0.683417C20.8256 0.245833 20.2039 0 19.5556 0ZM16.5 15.4583C16.5 13.7083 12.8333 12.8333 11 12.8333C9.16667 12.8333 5.5 13.7083 5.5 15.4583V16.3333H16.5M11 10.7917C11.7293 10.7917 12.4288 10.5151 12.9445 10.0228C13.4603 9.53054 13.75 8.86286 13.75 8.16667C13.75 7.47047 13.4603 6.80279 12.9445 6.31051C12.4288 5.81823 11.7293 5.54167 11 5.54167C10.2707 5.54167 9.57118 5.81823 9.05546 6.31051C8.53973 6.80279 8.25 7.47047 8.25 8.16667C8.25 8.86286 8.53973 9.53054 9.05546 10.0228C9.57118 10.5151 10.2707 10.7917 11 10.7917Z"
+                        fill="#A6A9AB" />
+                    </svg>
+                    <input type="email" class="form-control email_input" id="floatingInput" placeholder=""
+                      [(ngModel)]="authmail" name="email" required />
+                    <span class="omrs-input-label">Email ID</span>
+                  </div>
+                </label>
+                <div
+                  *ngIf="adminSignInForm && adminSignInForm.controls['email'] && adminSignInForm.controls['email'].hasError('required') && adminSignInForm.controls['email'].touched"
+                  class="text-danger" style="color: rgb(247, 14, 14);">
+                  Email is required
+                </div>
+              </div>
+              <br>
+              <div class="omrs-input-group">
+                <label class="omrs-input-underlined">
+                  <div class="inputField2">
+                    <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M3.33333 8V6.85714C3.33333 5.03852 4.03571 3.29437 5.28595 2.00841C6.5362 0.722447 8.23189 0 10 0C11.7681 0 13.4638 0.722447 14.714 2.00841C15.9643 3.29437 16.6667 5.03852 16.6667 6.85714V8H18.8889C19.1836 8 19.4662 8.12041 19.6746 8.33474C19.8829 8.54906 20 8.83975 20 9.14286V22.8571C20 23.1602 19.8829 23.4509 19.6746 23.6653C19.4662 23.8796 19.1836 24 18.8889 24H1.11111C0.816426 24 0.533811 23.8796 0.325437 23.6653C0.117063 23.4509 0 23.1602 0 22.8571V9.14286C0 8.83975 0.117063 8.54906 0.325437 8.33474C0.533811 8.12041 0.816426 8 1.11111 8H3.33333ZM17.7778 10.2857H2.22222V21.7143H17.7778V10.2857ZM8.88889 16.8366C8.46524 16.585 8.13414 16.1967 7.94693 15.7318C7.75973 15.2669 7.72689 14.7515 7.8535 14.2655C7.98011 13.7795 8.2591 13.35 8.6472 13.0437C9.0353 12.7374 9.51081 12.5714 10 12.5714C10.4892 12.5714 10.9647 12.7374 11.3528 13.0437C11.7409 13.35 12.0199 13.7795 12.1465 14.2655C12.2731 14.7515 12.2403 15.2669 12.0531 15.7318C11.8659 16.1967 11.5348 16.585 11.1111 16.8366V19.4286H8.88889V16.8366ZM5.55556 8H14.4444V6.85714C14.4444 5.64472 13.9762 4.48196 13.1427 3.62465C12.3092 2.76735 11.1787 2.28571 10 2.28571C8.82126 2.28571 7.6908 2.76735 6.8573 3.62465C6.02381 4.48196 5.55556 5.64472 5.55556 6.85714V8Z"
+                        fill="#A6A9AB" />
+                    </svg>
+                    <span class="p-viewer" (click)="toggleShow()">
+                    </span>
+                    <input type="password" class="form-control pass_input" id="password" placeholder=""
+                      [(ngModel)]="authPassword" name="password" required />
+                    <span class="omrs-input-label">Password</span>
+                  </div>
+                </label>
+                <div
+                  *ngIf="adminSignInForm?.controls['password']?.hasError('required') && adminSignInForm?.controls['password']?.touched"
+                  class="text-danger" style="color: rgb(247, 14, 14);">
+                  Password is required
+                </div>
+              </div>
+              <div *ngIf="errorMessage" class="text-danger" style="color: rgb(247, 14, 14);">
+                {{ errorMessage }}
+              </div>
+              <div class="d-grid mt-4" style="padding-left: 8rem">
+                <button type="submit" class="button" [disabled]="adminSignInForm.invalid || isSubmitting">Sign
+                  In</button>
+              </div>
+              <br>
+              <br>
+              <div class="register">
+                <h5 class="d-flex">
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

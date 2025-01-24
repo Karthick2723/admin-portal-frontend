@@ -1,0 +1,96 @@
+<div class="card rounded-0 fixed-row">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="pb-2 path">
+          Post/Article >
+        </div>
+        <h2 class="mobileFont">List of Post/Article</h2>
+      </div>
+      <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+        <button (click)="navigateToAddPage()" class="submit-btn float-right">+ New</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row container-fluid p-0 m-0 movable-content">
+  <div class="filterContainer">
+    <div class="filter-row d-flex">
+      <div>
+        <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
+          [ngClass]="{'btn-selected': selectedFilter === 'All'}">
+          All
+        </button>
+      </div>
+      <div class="mb-2">
+        <button class="btn btn-transparent pubBtn"
+          (click)="filterByStatus('isPublished');setSelectedFilter('isPublished')"
+          [ngClass]="{'btn-selected': selectedFilter === 'isPublished'}">
+          Published ({{publishCount}})
+        </button>
+      </div>
+      <div class="mb-2">
+        <button class="btn btn-transparent" (click)="filterByStatus('UnPublished');setSelectedFilter('UnPublished')"
+          [ngClass]="{'btn-selected': selectedFilter === 'UnPublished'}">
+          Unpublished ({{UnpublishCount}})
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 tab_align">
+    <div class="card-body table-responsive">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>S.No</th>
+          <td mat-cell *matCellDef="let element; let i = index">{{ getSerialNumber(i) }}</td>
+        </ng-container>
+        <ng-container matColumnDef="articleImage">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let element">
+            <img *ngIf="element.articleImage" [src]="element.articleImage" alt="Image" height="40" id="imagetable"
+              style="border-radius: 10px; object-fit: cover;">
+            <span *ngIf="!element.articleImage">No Image</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="organizationName">
+          <th mat-header-cell *matHeaderCellDef>Organization Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.organizationName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let element">{{ element.articleName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.createdAt | date:'dd-MM-yyyy' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="isPublished">
+          <th mat-header-cell *matHeaderCellDef class="custom-header text-center">Is Published</th>
+          <td mat-cell *matCellDef="let element" class="custom-cell text-center">
+            <img *ngIf="element.isPublished" matTooltip="Published"
+              src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/tick.jpg" alt="">
+            <img *ngIf="!element.isPublished" matTooltip="Unpublished"
+              src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/waiting.jpg" alt="">
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="custom-header">Action</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex">
+              <div matTooltip="View" (click)="view(element.articleId)" style="cursor: pointer;">
+                <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (2).jpg" alt="">
+              </div>
+              <div matTooltip="Edit" (click)="editItem(element.articleId)" style="margin-left: 13px; cursor: pointer;">
+                <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/editIcon.png" alt="">
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

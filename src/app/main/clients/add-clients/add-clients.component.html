@@ -1,0 +1,215 @@
+<form [formGroup]="clientForm">
+    <div class="card rounded-0 fixed-row">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="pb-2 path" *ngIf="!isView && !isEdit">
+                        Clients > &nbsp;<span class="path-link" (click)="navigateToClients()">List of Clients</span> >
+                        Add Client
+                    </div>
+                    <div class="pb-2 path" *ngIf="isView">
+                        Clients > &nbsp; <span class="path-link" (click)="navigateToClients()">List of Clients</span> >
+                        View Client
+                    </div>
+                    <div class="pb-2 path" *ngIf="isEdit">
+                        Clients > &nbsp;<span class="path-link" (click)="navigateToClients()">List of Clients</span> >
+                        Update Client
+                    </div>
+                    <div>
+                        <h2 *ngIf="!isView && !isEdit">Add Client</h2>
+                        <h2 *ngIf="isView">View Client</h2>
+                        <h2 *ngIf="isEdit">Edit Client</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+                    <div class="btn-toolbar flex-column flex-md-row" role="toolbar"
+                        aria-label="Toolbar with button groups">
+                        <div class="btn-group mb-2 mb-md-0 mr-md-2" role="group" aria-label="First group">
+                            <button type="button" *ngIf="isAdd" class="submit-btn position-relative"
+                                (click)="onSubmit()" [disabled]="submit || formSubmitted">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                    *ngIf="submit"></span>
+                                Add Client
+                            </button>
+                            <button type="button" class="edit-btn" *ngIf="isView"
+                                (click)="changeViewtoEdit()">Edit</button>
+                            <button type="button" *ngIf="isEdit" class="submit-btn position-relative"
+                                (click)="onUpdate()" [disabled]="update || formUpdated">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                    *ngIf="update"></span>
+                                Update Client
+                            </button>
+                        </div>
+                        <div class="btn-group mb-2 mb-md-0" role="group" aria-label="Second group">
+                            <div *ngIf="isAdd || isEdit;else back_button">
+                                <button type="button" class="discard-btn" (click)="discard()">Discard</button>
+                            </div>
+                            <ng-template #back_button>
+                                <button type="button" class="discard-btn" (click)="navigateListPage()">Back</button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row container-fluid movable-content">
+        <div class="col ">
+            <div class="row d-flex flex-column">
+                <div class="col">
+                    <div class="card  pl-4 pr-4 pb-3 pt-4  rounded-0 ">
+                        <h5 class="card-title pb-2 font-weight-bold">Basic Details</h5>
+                        <div class="card-body border">
+                            <div class="form-group">
+                                <label class="font-weight-bold">Client Name <span class="text-danger">*</span></label>
+                                <input class="form-control" formControlName="clientName" required
+                                    [class.is-invalid]="clientFormField('clientName')?.invalid && (clientFormField('clientName')?.dirty || clientFormField('clientName')?.touched)" />
+                                <div *ngIf="clientFormField('clientName')?.invalid && (clientFormField('clientName')?.dirty || clientFormField('clientName')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('clientName')?.errors?.['required']">
+                                        Client Name is required
+                                    </div>
+                                    <div *ngIf="clientFormField('clientName')?.errors?.['maxlength']">
+                                        Client Name cannot exceed 50 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" formControlName="description" required rows="4"
+                                    [class.is-invalid]="clientFormField('description')?.invalid && (clientFormField('description')?.dirty || clientFormField('description')?.touched)"></textarea>
+                                <div *ngIf="clientFormField('description')?.invalid && (clientFormField('description')?.dirty || clientFormField('description')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('description')?.errors?.['required']">
+                                        Description is required
+                                    </div>
+                                    <div *ngIf="clientFormField('description')?.errors?.['maxlength']">
+                                        Description cannot exceed 250 characters
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card pl-4 pr-4 pb-3 pt-4  rounded-0 ">
+                        <h5 class="card-title pb-2 font-weight-bold">Contact Details</h5>
+                        <div class="card-body border">
+                            <div class="form-group">
+                                <label class="form-label font-weight-bold">Contact Person <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="contactPerson"
+                                    [class.is-invalid]="clientFormField('contactPerson')?.invalid && (clientFormField('contactPerson')?.dirty || clientFormField('contactPerson')?.touched)" />
+                                <div *ngIf="clientFormField('contactPerson')?.invalid && (clientFormField('contactPerson')?.dirty || clientFormField('contactPerson')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('contactPerson')?.errors?.['required']">
+                                        Contact Person is required
+                                    </div>
+                                    <div *ngIf="clientFormField('contactPerson')?.errors?.['maxlength']">
+                                        Contact Person cannot exceed 50 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label font-weight-bold">Phone Number <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+91</span>
+                                    <input type="text" id="eventFromTelephoneNumber" class="form-control"
+                                        formControlName="phoneNumber" maxlength="10"
+                                        [class.is-invalid]="clientFormField('phoneNumber')?.invalid && (clientFormField('phoneNumber')?.dirty || clientFormField('phoneNumber')?.touched)"
+                                        [attr.aria-invalid]="clientFormField('phoneNumber')?.invalid ? 'true' : 'false'"
+                                        [attr.aria-describedby]="clientFormField('phoneNumber')?.invalid ? 'phoneNumberError' : null">
+                                    <div *ngIf="clientFormField('phoneNumber')?.invalid && (clientFormField('phoneNumber')?.dirty || clientFormField('phoneNumber')?.touched)"
+                                        id="phoneNumberError" class="invalid-feedback">
+                                        Phone number must be exactly 10 digits.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label font-weight-bold">Email <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control" formControlName="emailId"
+                                    [class.is-invalid]="isInValidField('emailId')" />
+                                <div *ngIf="isInValidField('emailId')" class="invalid-feedback">
+                                    <div *ngIf="clientFormField('emailId')?.errors?.['email']">
+                                        {{ emailValidationText }}
+                                    </div>
+                                    <div *ngIf="clientFormField('emailId')?.errors?.['required']">
+                                        Email is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row d-flex flex-column">
+                <div class="col">
+                    <div class="card pl-4 pr-4 pb-3 pt-4  rounded-0 ">
+                        <h5 class="card-title pb-2 font-weight-bold">Location Details</h5>
+                        <div class="card-body border">
+                            <div class="form-group">
+                                <label class="font-weight-bold">Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" formControlName="address" required rows="4"
+                                    [class.is-invalid]="clientFormField('address')?.invalid && (clientFormField('address')?.dirty || clientFormField('address')?.touched)"></textarea>
+                                <div *ngIf="clientFormField('address')?.invalid && (clientFormField('address')?.dirty || clientFormField('address')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('address')?.errors?.['required']">
+                                        Address is required
+                                    </div>
+                                    <div *ngIf="clientFormField('address')?.errors?.['maxlength']">
+                                        Address cannot exceed 150 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">City <span class="text-danger">*</span></label>
+                                <input class="form-control" formControlName="city" required
+                                    [class.is-invalid]="clientFormField('city')?.invalid && (clientFormField('city')?.dirty || clientFormField('city')?.touched)" />
+
+                                <div *ngIf="clientFormField('city')?.invalid && (clientFormField('city')?.dirty || clientFormField('city')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('city')?.errors?.['required']">
+                                        City is required
+                                    </div>
+                                    <div *ngIf="clientFormField('city')?.errors?.['maxlength']">
+                                        City cannot exceed 50 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Country <span class="text-danger">*</span></label>
+                                <input class="form-control" formControlName="country" required
+                                    [class.is-invalid]="clientFormField('country')?.invalid && (clientFormField('country')?.dirty || clientFormField('country')?.touched)" />
+                                <div *ngIf="clientFormField('country')?.invalid && (clientFormField('country')?.dirty || clientFormField('country')?.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="clientFormField('country')?.errors?.['required']">
+                                        Country is required
+                                    </div>
+                                    <div *ngIf="clientFormField('country')?.errors?.['maxlength']">
+                                        Country cannot exceed 50 characters
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card active-div  rounded-0 ">
+                        <div class="form-group d-flex align-items-center">
+                            <input type="checkbox" class="me-2" id="statusCheckbox" formControlName="status">
+                            <label class="form-label ms-2 mb-0 font-weight-bold" for="statusCheckbox">Active</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="clientDivisionList">
+        <app-client-branch-list [clientId]="id" class="mt-4  border" [clientDivisionData]="clientDivisionList"
+            [ngClass]="{'disabled':isEdit}"></app-client-branch-list>
+    </div>
+</form>

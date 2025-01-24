@@ -1,0 +1,284 @@
+.row {
+    --bs-gutter-x: 0.5rem;
+}
+
+label {
+    font-weight: 500;
+    size: 20px;
+    line-height: 30px;
+}
+
+.upload_label {
+    line-height: 10px !important;
+    margin-bottom: 0px;
+}
+
+path {
+    color: #8B8B8B;
+}
+
+.card {
+    border-radius: 0px;
+}
+
+.upload_hides {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+}
+
+.drag-area {
+    border: 1px dotted black;
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+
+.choose_file {
+    pointer-events: none;
+    font-size: 12px;
+    color: #8B8B8B;
+}
+
+.choose_file>a {
+    text-decoration: underline;
+    color: black;
+}
+
+.dropdown-solution-cateory {
+    border: 1px solid #6A6B6C33;
+}
+
+image>img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: auto;
+}
+
+.drag_text {
+    font-size: 12px;
+    margin-top: 16px;
+    color: #8B8B8B;
+}
+
+@media only screen and (max-width: 420px) {
+    .btn-box {
+        margin-left: 20px;
+    }
+
+    .btn-dis {
+        margin-left: 0px !important;
+        margin-top: 5px;
+    }
+}
+
+.quill-container {
+    height: 207px !important;
+    overflow-y: auto !important;
+}
+
+svg {
+    opacity: 0.1;
+    height: 100px;
+}
+
+.product-radio {
+    accent-color: #D7181F;
+
+}
+
+.drag-area {
+    border: 1px dashed black;
+    border-radius: 5px;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.drag-area .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.drag-area .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.drag-area .m-5 {
+    text-align: center;
+    padding-top: 50px;
+    color: #555;
+}
+
+.drag-area .m-5 img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.drag-area .drag_text {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.drag-area .choose_file a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.img-disable[_ngcontent-ng-c4106703240] {
+    color: #6c757d;
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.upload_hide {
+    display: none;
+}
+
+.choose_file {
+    pointer-events: none;
+    font-size: 12px;
+    color: #8B8B8B;
+}
+
+.choose_file>a {
+    text-decoration: underline;
+    color: black;
+}
+
+image>img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: auto;
+}
+
+.image {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.image:hover .overlay {
+    display: block;
+}
+
+
+textarea:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.custom-editor-add {
+    background-color: #D7181F;
+    border-radius: 5px;
+    color: white;
+    height: 20px;
+    width: 40px;
+    border: none;
+    overflow: hidden;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.custom-editor-remove {
+    background-color: transparent;
+    border-radius: 5px;
+    color: rgb(7, 7, 7);
+    border: 1px solid rgb(40, 40, 40);
+    height: 20px;
+    width: 40px;
+    font-weight: bold;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ng-select .ng-select-disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.img-disable {
+    color: #6c757d;
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.editor-content {
+    border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.content {
+    text-align: left;
+    padding: 10px;
+    text-indent: 20px;
+}
+
+.text-wrap {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.custom-editor-btnGroup {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+}
+
+.custom-add-btn {
+    border: 1px solid rgb(10, 10, 10);
+    border-radius: 9px;
+}
+
+.is-invalid-textArea {
+    border-color: var(--bs-form-invalid-border-color) !important;
+}
+
+.active-button {
+    background-color: #D7181F !important;
+    color: white;
+    font-weight: 100;
+}
+
+.active-icon {
+    color: #D7181F;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+}

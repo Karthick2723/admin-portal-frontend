@@ -1,0 +1,45 @@
+.custom-input-invalid {
+    border-color: #dc3545;
+}
+
+.time-field {
+    height: 39px;
+    width: 81px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    --bs-dropdown-link-active-bg: #f7f6f6;
+}
+
+.hide-dropdown {
+    display: none;
+}
+.input-group-text {
+    padding: 0.1rem 0 0 0.3rem;
+    border: 1px solid #e7e2e2;
+    margin-right: 1px;
+    cursor: pointer;
+}
+.bi.bi-clock{
+    font-size: 15px;
+    margin-right: 3px;
+}
+.form-control:focus {
+    background-color: #e9ecef !important;
+}
+.input-group-text {
+    background-color: #ffffff;
+}
+@media (min-width:776px) and (max-width:1023px){
+    .dropdown{
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+    }
+}

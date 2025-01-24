@@ -1,0 +1,84 @@
+<div class="overall">
+  <mat-dialog-content class="dailog-header">
+    <div class="modal-header">
+      <div class="d-flex">
+        <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/importImage.png" width="50px"
+          style="margin-right: 23px;" alt="">
+        <h5 class="modal-title m-auto" id="exampleModalLongTitle"> Import logs</h5>
+      </div>
+      <div>
+        <h5 class="m-auto" style="color: #F3F4F5;">Total logs : {{totalCount}} Records</h5>
+      </div>
+    </div>
+    <div class="modal-body d-flex justify-content-evenly pt-5">
+      <div>
+        <div class="d-flex mb-2 justify-content-between">
+          <div class="d-flex">
+            <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/successIcon.png" alt=""
+              style="width: 14px;height: 14px;">
+            <h5 class="ml-2 mb-0" style="font-weight: 700; color: #212529;">Success records</h5>
+          </div>
+          <div>
+            <h5>{{successCount}} Records</h5>
+          </div>
+        </div>
+        <div class="d-flex mb-2 justify-content-between" style="width: 320px;">
+          <div class="accordion accordion-flush d-flex" id="accordionFlushExample">
+            <div class="accordion-item" style="width: 200px;">
+              <div class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" style="    padding: 10px 0px;" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseone" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/failureIcon.png" alt="">
+                  <h5 class="ml-2 mb-0" style="font-weight: 700;">Failure records</h5>
+                </button>
+              </div>
+              <div id="flush-collapseone" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <tr *ngFor="let failureList of failureList">
+                    <td style="font-size: 10px;"> Order#:{{failureList.orderId}}</td>
+                    <td style="font-size: 13px;">{{failureList.message}}</td>
+                  </tr>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{{failureCount}} Records</h5>
+          </div>
+        </div>
+        <div class="d-flex mb-2 justify-content-between" style="width: 320px;">
+          <div class="accordion accordion-flush d-flex" id="accordionFlushExample">
+            <div class="accordion-item" style="width: 200px;">
+              <div class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" style="    padding: 10px 0px;" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapsesecond" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/rejectIcon.png" alt="">
+                  <h5 class="ml-2 mb-0" style="font-weight: 700;">Rejected Records</h5>
+                </button>
+              </div>
+              <div id="flush-collapsesecond" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <tr *ngFor="let reject of rejectList">
+                    <td style="font-size: 10px;"> Order#:{{reject.orderId}}</td>
+                    <td style="font-size: 13px;">{{reject.message}}</td>
+                  </tr>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{{rejectCount}} Records</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="button" class="btn btn-primary" (click)="successMessage()"
+      style="width: 150px;height: 40px; margin: auto;" mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+  </mat-dialog-actions>
+</div>

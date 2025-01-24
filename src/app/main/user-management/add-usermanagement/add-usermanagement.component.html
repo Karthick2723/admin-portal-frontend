@@ -1,0 +1,239 @@
+<div class="card rounded-0 fixed-row">
+  <div class="card-body ">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="pb-2 path">
+          <div class="pb-2 path" *ngIf="action !== 'view' && action !== 'edit'">
+            User Management > &nbsp;<span style="display: contents;" class="path-link" (click)="navigateListPage()">
+              List of Users </span> > Add User
+          </div>
+          <div class="pb-2 path" *ngIf="action=='edit'">
+            User Management > &nbsp;<span style="display: contents;" class="path-link" (click)="navigateListPage()">
+              List of Users </span> > Edit
+            User
+          </div>
+          <div class="pb-2 path" *ngIf="action=='view'">
+            User Management > &nbsp;<span style="display: contents;" class="path-link" (click)="navigateListPage()">
+              List of Users </span> > View
+            User
+          </div>
+        </div>
+        <div>
+          <h2 *ngIf="action !== 'view' && action !== 'edit'">Add User</h2>
+          <h2 *ngIf="action=='edit'">Edit User</h2>
+          <h2 *ngIf="action=='view'">View User</h2>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+        <div class="btn-box d-flex">
+          <button type="submit" (click)="onSubmit()" class="btn btn-primary" style="width: 125px;"
+            *ngIf="action !== 'view' && action !== 'edit' && publishbtn==false">Add User </button>
+          <button type="submit" (click)="changeViewtoEdit()" class="btn btn-edit" *ngIf="action=='view'">Edit
+          </button>
+          <button type="submit" (click)="update()" style="width: 125px;" class="btn btn-primary"
+            *ngIf="action=='edit'&& publishbtn==false">Update </button>
+          <div style="width: 20px;"></div>
+          <button class="btn btn-secondary btn-dis" [routerLink]="['/UserManagement']"
+            style="width: 125px;">{{action=='view'?'Back':'Discard'}} </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid movable-content col-Mobilepadding">
+  <form [formGroup]="UserDeatils" class="p-2 col-Mobilepadding">
+    <div class="row">
+      <div class="col-sm-12 col-lg-6 col-Mobilepadding">
+        <div class="card pl-4 pr-4 pb-3 pt-4">
+          <h5 class="card-title pb-2">Location Details </h5>
+          <div class="card-body border">
+            <div class="p-2">
+              <div class="form-group">
+                <label for="firstName">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="w-100 form-control" id="firstName" formControlName="firstName"
+                  [ngClass]="{'is-invalid': UserDeatils.get('firstName').invalid && (UserDeatils.get('firstName').dirty || UserDeatils.get('firstName').touched)}">
+                <div
+                  *ngIf="UserDeatils.get('firstName').invalid && (UserDeatils.get('firstName').dirty || UserDeatils.get('firstName').touched)"
+                  class="invalid-feedback">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <ng-container *ngIf="UserDeatils.get('firstName').hasError('required')">
+                    First Name is required
+                  </ng-container>
+                  <ng-container *ngIf="UserDeatils.get('firstName').hasError('maxlength')">
+                    First Name cannot exceed 50 characters
+                  </ng-container>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="w-100 form-control" id="lastName" formControlName="lastName"
+                  [ngClass]="{'is-invalid': UserDeatils.get('lastName').invalid && (UserDeatils.get('lastName').dirty || UserDeatils.get('lastName').touched)}">
+                <div
+                  *ngIf="UserDeatils.get('lastName').invalid && (UserDeatils.get('lastName').dirty || UserDeatils.get('lastName').touched)"
+                  class="invalid-feedback">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <ng-container *ngIf="UserDeatils.get('lastName').hasError('required')">
+                    Last Name is required
+                  </ng-container>
+                  <ng-container *ngIf="UserDeatils.get('lastName').hasError('maxlength')">
+                    Last Name cannot exceed 50 characters
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-6 col-Mobilepadding">
+        <div class="card pl-4 pr-4 pb-3">
+          <h5 class="card-title pb-2 pt-2">User Image </h5>
+          <div class="card-body border d-flex justify-content-center">
+            <div class="">
+              <div class="d-flex justify-content-between">
+                <img class="m-2" (click)="removeImage()" *ngIf="base64String && action !== 'view'"
+                  src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/deleteIcon.png"
+                  data-toggle="modal" data-target="#exampleModalCenter">
+              </div>
+              <div class="text-center">
+                <div class="drag-area">
+                  <input (change)="fileChangeEvent($event)" #fileInput type="file" class="upload_hide"
+                    id="upload_costum" *ngIf="action !== 'view'">
+                  <label for="upload_costum" class="upload_label">
+                    <div class="image" [ngClass]="{'placeholder-content': !UserDeatils.get('photoUrl').value}"
+                      style="width: 180px;height: 180px;">
+                      <img class="cover-image" [class.img-disable]="isView" [src]="UserDeatils.get('photoUrl').value "
+                        *ngIf="UserDeatils.get('photoUrl').value" alt="Selected Cover Image"
+                        style="height: 180px; width: 180px ;">
+                      <div *ngIf="!UserDeatils.get('photoUrl').value && !imgInputclose" class="letter">
+                        {{getProfileImageFileName()}}
+                      </div>
+                      <div class="overlay" *ngIf="UserDeatils.get('photoUrl').value"></div>
+                      <div *ngIf="!UserDeatils.get('photoUrl').value" class="m-5">
+                        <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (3).jpg"
+                          alt="Placeholder Image">
+                        <p class="choose_file"><a><br><b>Click to browse</b></a></p>
+                      </div>
+                    </div>
+                  </label>
+                  <div *ngIf="action === 'view'">
+                    <img class="w-100" [style.height.px]="100" [style.objectFit]="'contain'" [src]="base64String"
+                      *ngIf="base64String" alt="Profile Image">
+                    <div *ngIf="!base64String" class="letter">
+                      {{getProfileImageFileName()}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #cropperModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Crop Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="cropper-container">
+              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="180/ 180" format="png" (imageCropped)="onImageCropped($event)"
+                (cropperReady)="onCropperReady()" (loadImageFailed)="onLoadImageFailed()">
+              </image-cropper>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="confirmCrop(modal)">Crop & Save</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-6 col-Mobilepadding">
+        <div class="card pl-4 pr-4 pb-3 pt-4">
+          <h5 class="card-title pb-2">Location Details </h5>
+          <div class="card-body border">
+            <div class="p-2">
+              <div class="form-group">
+                <label for="mobileNumber">Mobile Number <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="mobileNumber" formControlName="phoneNbr"
+                    [ngClass]="{'is-invalid': UserDeatils.get('phoneNbr').invalid && (UserDeatils.get('phoneNbr').dirty || UserDeatils.get('phoneNbr').touched)}"
+                    maxlength="13">
+                </div>
+                <div
+                  *ngIf="UserDeatils.get('phoneNbr').invalid && (UserDeatils.get('phoneNbr').dirty || UserDeatils.get('phoneNbr').touched)"
+                  class="invalid-feedback">
+                  Phone number needs to start with +91 and be valid.
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-3 flex-column">
+                <label for="emailId">Email Id <span class="text-danger">*</span></label>
+                <input type="text" class="w-100" class="form-control" id="emailId" formControlName="emailId"
+                  [ngClass]="{'is-invalid': UserDeatils.get('emailId').invalid && (UserDeatils.get('emailId').dirty || UserDeatils.get('emailId').touched)}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-6 col-Mobilepadding">
+        <div class="card pl-4 pr-4 pb-3 pt-4">
+          <h5 class="card-title pb-2">Organization Details </h5>
+          <div class="card-body border">
+            <div class="p-2">
+              <div class="form-group">
+                <label for="clientName">Organization Name <span class="text-danger">*</span></label>
+                <input type="text" class="w-100 form-control" id="clientName" formControlName="clientName"
+                  [ngClass]="{'is-invalid': UserDeatils.get('clientName').invalid && (UserDeatils.get('clientName').dirty || UserDeatils.get('clientName').touched)}">
+                <div
+                  *ngIf="UserDeatils.get('clientName').invalid && (UserDeatils.get('clientName').dirty || UserDeatils.get('clientName').touched)"
+                  class="invalid-feedback">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <ng-container *ngIf="UserDeatils.get('clientName').hasError('required')">
+                    Organization Name is required
+                  </ng-container>
+                  <ng-container *ngIf="UserDeatils.get('clientName').hasError('maxlength')">
+                    Organization Name cannot exceed 50 characters
+                  </ng-container>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Organization Address <span class="text-danger">*</span></label>
+                <input type="text" class="w-100 form-control" id="address" formControlName="address"
+                  [ngClass]="{'is-invalid': UserDeatils.get('address').invalid && (UserDeatils.get('address').dirty || UserDeatils.get('address').touched)}">
+                <div
+                  *ngIf="UserDeatils.get('address').invalid && (UserDeatils.get('address').dirty || UserDeatils.get('address').touched)"
+                  class="invalid-feedback">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <ng-container *ngIf="UserDeatils.get('address').hasError('required')">
+                    Organization Address is required
+                  </ng-container>
+                  <ng-container *ngIf="UserDeatils.get('address').hasError('maxlength')">
+                    Organization Address cannot exceed 150 characters
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="action === 'edit' || action === 'view'" class="">
+          <div class="card ">
+            <div class="card-body p-0">
+              <div class="container">
+                <form [formGroup]="UserDeatils" class="p-2">
+                  <div class="form-group">
+                    <label class="radio-inline mr-3">
+                      <input type="radio" formControlName="status" value="Active" class="product-radio"> Active
+                      <input type="radio" formControlName="status" value="InActive" class="product-radio"> InActive
+                    </label>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

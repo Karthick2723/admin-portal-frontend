@@ -1,0 +1,127 @@
+<div class="card rounded-0 fixed-row">
+  <div class="card-body ">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <div class="pb-2 path">
+          User Management > List of Users
+        </div>
+        <h2>List of Users </h2>
+      </div>
+      <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+        <button (click)="navigateToAddPage()" class="submit-btn float-right">+ New</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row container-fluid movable-content">
+  <div class="filterContainer">
+    <div class="filter-row d-flex">
+      <div class=" text-center">
+        <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
+          [ngClass]="{'btn-selected': selectedFilter === 'All'}" (click)="setSelectedFilter('All')"
+          (click)="resetFilter()">All</button>
+      </div>
+      <div class=" text-center mb-2">
+        <button class="btn btn-transparent pubBtn"
+          (click)="filterByStatus('isPublished');setSelectedFilter('isPublished')"
+          [ngClass]="{'btn-selected': selectedFilter === 'isPublished'}">Active ({{publishCount}})</button>
+      </div>
+      <div class=" text-center mb-2">
+        <button class="btn btn-transparent" (click)="filterByStatus('UnPublished');setSelectedFilter('UnPublished')"
+          [ngClass]="{'btn-selected': selectedFilter === 'UnPublished'}">InActive ({{UnpublishCount}})</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12  tab_align">
+    <div class="card-body table-responsive">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>S.No </th>
+          <td mat-cell *matCellDef="let element let i = index">{{ getSerialNumber(i) }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Image">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="letter" *ngIf="element.photoUrl == null">{{getFirstLetter(element.firstName)}}</div>
+            <img *ngIf="element.photoUrl != null" [src]="element.photoUrl" alt="Image" height="40" id="imagetable"
+              style="border-radius: 50%;">
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Email Id">
+          <th mat-header-cell *matHeaderCellDef> Email Id </th>
+          <td mat-cell *matCellDef="let element">{{element.emailId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="First Name">
+          <th mat-header-cell *matHeaderCellDef> First Name </th>
+          <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Last Name">
+          <th mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Organization">
+          <th mat-header-cell *matHeaderCellDef>Organization</th>
+          <td mat-cell *matCellDef="let element">{{element.clientName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="productCode">
+          <th mat-header-cell *matHeaderCellDef> Product Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.productCode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="verified">
+          <th mat-header-cell *matHeaderCellDef class="custom-header">Status</th>
+          <td mat-cell *matCellDef="let element" class="custom-cell">
+            <div *ngIf="element.status=='Active'">
+              <img matTooltip="Active"
+                src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/userActive.png" alt="">
+            </div>
+            <div *ngIf="element.status==null ||element.status=='InActive'">
+              <img matTooltip="InActive"
+                src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/userInactive.png" alt="">
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef class="custom-header">Action</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex ">
+              <div matTooltip="View" (click)="view(element.userId)" style="cursor: pointer;">
+                <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (2).jpg" alt="">
+              </div>
+              <div matTooltip="Edit" style="margin-left: 3px;cursor: pointer;" (click)="editItem(element.userId)">
+                <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/editIcon.png" alt="">
+              </div>
+
+            </div>
+          </td>
+        </ng-container>
+        <tr style="background-color: #F3F4F5;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+  <div class="deleteModel">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/deleteIcon.png">
+          </div>
+          <div class="modal-footer">
+            <p>Are you ready to delete nancy31</p>
+            <div class="two_btn">
+              <button type="button" class="btn btn-primary">Delete</button>
+              <div style="width: 30px;"></div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

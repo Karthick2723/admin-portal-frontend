@@ -1,0 +1,203 @@
+<form [formGroup]="articleForm">
+
+  <div class="card rounded-0 fixed-row">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="pb-2 path" *ngIf="!isView && !isEdit">
+            Post/Article > &nbsp;<span class="path-link" (click)="navigateToArticles()">Add Post/Article</span>
+          </div>
+          <div class="pb-2 path" *ngIf="isView">
+            Post/Article > &nbsp;<span class="path-link" (click)="navigateToArticles()">View Post/Article</span>
+          </div>
+          <div class="pb-2 path" *ngIf="isEdit">
+            Post/Article > &nbsp;<span class="path-link" (click)="navigateToArticles()">Edit Post/Article</span>
+          </div>
+          <div>
+            <h2 *ngIf="!isView && !isEdit">Add Post/Article</h2>
+            <h2 *ngIf="isView">View Post/Article</h2>
+            <h2 *ngIf="isEdit">Edit Post/Article</h2>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-lg-end align-items-start mt-3 mt-lg-0">
+          <div class="btn-toolbar flex-column flex-md-row" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mb-2 mb-md-0 mr-md-2" role="group" aria-label="First group">
+              <button type="button" *ngIf="isAdd" class="submit-btn position-relative" (click)="onSubmit()"
+                [disabled]="submit">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="submit"></span>
+                Add Post/Article
+              </button>
+              <button type="button" class="edit-btn" *ngIf="isView" (click)="changeViewtoEdit()">Edit</button>
+              <button type="button" *ngIf="isEdit" class="submit-btn position-relative" (click)="updateArticle()"
+                [disabled]="update">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="update"></span>
+                Update
+              </button>
+            </div>
+            <div class="btn-group mb-2 mb-md-0" role="group" aria-label="Second group">
+              <div *ngIf="isAdd || isEdit;else back_button">
+                <button type="button" class="discard-btn" (click)="discardForm()">Discard</button>
+              </div>
+              <ng-template #back_button>
+                <button type="button" class="discard-btn" (click)="navigateToArticles()">Back</button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt-5 movable-content">
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="card mb-0">
+          <div class="card-body">
+            <h5 class="card-title">Basic details</h5>
+            <div class="card-body border">
+              <div class="form-group">
+                <div formGroupName="articleTypeDTO">
+                  <label for="articleTypeId">Type<span class="text-danger">*</span></label>
+                  <select id="articleType" class="form-control" formControlName="articleTypeId" [ngClass]="{
+                    'is-invalid': articleForm.get('articleTypeDTO.articleTypeId')?.invalid && 
+                                  (articleForm.get('articleTypeDTO.articleTypeId')?.dirty || 
+                                   articleForm.get('articleTypeDTO.articleTypeId')?.touched)
+                  }">
+                    <option *ngFor="let type of articleTypeOptions" [ngValue]="type.articleTypeId">
+                      {{ type.articleTypeName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="eventTitle">Title<span class="text-danger">*</span></label>
+                <input type="text" id="eventTitle" class="form-control" placeholder="Title"
+                  formControlName="articleName" [ngClass]="{ 'is-invalid': isInValidField('articleName') }" />
+              </div>
+              <div class="form-group">
+                <label for="tags">Tags <span class="text-danger">*</span></label>
+                <div>
+                  <ng-select [items]="tags" bindLabel="articleTagName" [addTag]="addCustomTags" [multiple]="true"
+                    placeholder="Select tag or add custom tag" formControlName="articlesTagDTOs"
+                    [ngClass]="{ 'is-invalid': isInValidField('articlesTagDTOs') }">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-6">
+        <div class="card pl-4 pr-4 pb-0 mb-0 pt-4 h-100">
+          <div class="card-body">
+            <h5 class="card-title mt-1">Cover Image <span class="text-danger">*</span></h5>
+            <div class="cover-img-div" style="padding: 40px;">
+              <div class="align-items-center" style="height: 100%;">
+                <div class="drag-area" [class.is-invalid]="isInValidField('articleImage')">
+                  <input (change)="fileChangeEvent($event)" #fileInput type="file" class="upload_hide"
+                    id="upload_coverImg" *ngIf="!isView">
+                  <label for="upload_coverImg" class="upload_label">
+                    <div class="image" [ngClass]="{'placeholder-content': !articleForm.get('articleImage').value}">
+                      <img class="cover-image" [class.img-disable]="isView"
+                        [src]="articleForm.get('articleImage').value" *ngIf="articleForm.get('articleImage').value"
+                        alt="Selected Cover Image">
+                      <div class="overlay" *ngIf="articleForm.get('articleImage').value"></div>
+                      <div *ngIf="!articleForm.get('articleImage').value" class="m-5">
+                        <img src="https://solizecorporateweb.s3.amazonaws.com/admin/asset/images/Vector (3).jpg"
+                          alt="Placeholder Image">
+                        <p class="choose_file">
+                          <a><br><b>Click to browse</b></a>
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #cropperModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Crop Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="cropper-container">
+              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="300 / 171" format="png" (imageCropped)="onImageCropped($event)"
+                (cropperReady)="onCropperReady()" (loadImageFailed)="onLoadImageFailed()">
+              </image-cropper>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="confirmCrop(modal, 'articleImage')">Crop &
+              Save</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Author Details</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="border p-3">
+                  <div class="form-group">
+                    <label for="authorName">Author Name<span class="text-danger">*</span></label>
+                    <input type="text" id="authorName" class="form-control" formControlName="authorName"
+                      placeholder="Author Name" [ngClass]="{ 'is-invalid': isInValidField('authorName') }" />
+                  </div>
+                  <div class="form-group">
+                    <label for="organizationName">Organization Name<span class="text-danger">*</span></label>
+                    <input type="text" id="organizationName" class="form-control" formControlName="organizationName"
+                      placeholder="Organization Name"
+                      [ngClass]="{ 'is-invalid': isInValidField('organizationName') }" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="border p-3">
+                  <div class="form-group">
+                    <label for="designation">Designation<span class="text-danger">*</span></label>
+                    <input type="text" id="designation" class="form-control" formControlName="designation"
+                      placeholder="Designation" [ngClass]="{ 'is-invalid': isInValidField('designation') }" />
+                  </div>
+                  <div class="form-group">
+                    <label for="about">About<span class="text-danger">*</span></label>
+                    <input type="text" id="about" class="form-control" formControlName="aboutArticles"
+                      placeholder="About" [ngClass]="{ 'is-invalid': isInValidField('aboutArticles') }" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card  pl-4 pr-4 pb-3 pt-4">
+          <h5 class="card-title pb-2">Full Description</h5>
+          <div class="card-body border">
+            <app-custom-editor [initialData]="customEditorsDTOs" [receiveData]="customEditorsDTOs.value"
+              [isEditorDataLoad]="isEditorDataLoad" [isView]="isView"
+              (formDataChanged)="handleFormDataChanged($event)"></app-custom-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 pb-2">
+      <div class="card" style="padding: 3px;">
+        <div class="card-body p-2">
+          <label class="radio-inline mr-3">
+            <input type="checkbox" formControlName="isPublished" (change)="togglePublished($event)"> Is Published
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

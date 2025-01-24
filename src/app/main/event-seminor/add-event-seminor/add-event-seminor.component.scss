@@ -1,0 +1,427 @@
+.modal-header .close {
+    margin: -1rem -0.5rem -1rem auto;
+}
+.input-group {
+    position: relative;
+}
+.input-group .input-group-text {
+    background-color: #ffffff;
+    border-right: 0;
+}
+
+.input-group input {
+    padding-left: 0.5rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+label {
+    font-weight: 500;
+    size: 20px;
+    line-height: 30px;
+}
+
+.drag_text {
+    font-size: 12px;
+    margin-top: 16px;
+    color: #8B8B8B;
+}
+
+path {
+    color: #8B8B8B;
+}
+
+.upload_label {
+    line-height: 8px !important;
+    margin-bottom: 0px !important;
+}
+
+.upload_hide {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+}
+
+.drag-area {
+    border: 1px dashed black;
+    border-radius: 5px;
+    height: 138.2px;
+    width: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.drag-area .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 138px;
+    width: 240px;
+}
+
+.drag-area .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.drag-area .m-5 {
+    text-align: center;
+    padding-top: 0px;
+    color: #555;
+}
+
+.CovImg {
+    padding-top: 40px !important;
+}
+
+.drag-area .m-5 img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.drag-area .drag_text {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.drag-area .choose_file a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.upload_hide {
+    display: none;
+}
+
+.choose_file {
+    pointer-events: none;
+    font-size: 12px;
+    color: #8B8B8B;
+}
+
+.choose_file>a {
+    text-decoration: underline;
+    color: black;
+}
+
+image>img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: auto;
+}
+
+.contentHeight {
+    height: 502px;
+}
+
+.card {
+    border-radius: 0px;
+    box-shadow: none !important;
+}
+
+.card:hover .card-body {
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 420px) {
+
+    .btn-box {
+        margin-left: 20px;
+    }
+
+    .btn-dis {
+        margin-left: 0px !important;
+        margin-top: 5px;
+    }
+}
+
+svg {
+    opacity: 0.1;
+    height: 100px;
+}
+
+.img-disable {
+    color: #6c757d;
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .vendor_card {
+        margin-top: -104px;
+    }
+}
+
+
+
+.checkbox-content {
+    height: 80px;
+}
+
+
+
+.detailsHeight {
+    min-height: 660px;
+}
+
+.otherInfo {
+    height: 302px;
+}
+
+
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.eventDateTimes-fields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+select,
+textarea {
+    border-radius: 0px !important;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    border-radius: 0px !important;
+}
+
+
+.active-div {
+    padding: 18px 0 0 25px;
+}
+
+.cover-img-div {
+    width: 200px;
+    margin: auto
+}
+
+.disabled-cursor {
+    cursor: not-allowed;
+}
+
+input:disabled {
+    cursor: not-allowed;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.p-2 {
+    padding: 10px;
+}
+
+.fa-plus-circle,
+.fa-minus-circle {
+    font-size: 20px;
+}
+
+@media (max-width: 576px) {
+    .d-flex {
+        flex-direction: column;
+    }
+
+}
+
+.custom-input-field {
+    height: 50px !important;
+    border-radius: 0px !important;
+}
+
+.is-invalids {
+    border: 1px solid #dc3545;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+}
+
+.custom-input-invalid {
+    border-color: #dc3545;
+}
+
+.image {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.image:hover .overlay {
+    display: block;
+}
+
+.checkBox-lable-align {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input:checked {
+    background-color: #ea140e !important;
+    border-color: none !important;
+}
+
+.invalid-border {
+    border-color: #dc3545 !important;
+}
+
+.drag-area.is-invalid {
+    border: 1px dashed #dc3545 !important;
+}
+
+
+.editor-content {
+    border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.active-button {
+    background-color: #D7181F !important;
+    color: white;
+    font-weight: 100;
+}
+
+.active-icon {
+    color: #D7181F;
+}
+
+.btn-custom {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.dropdown-menu .dropdown-item {
+    text-align: center;
+}
+
+.fixed-size-btn {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fdc5c5;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.custom-editor-btnGroup {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+}
+
+.custom-add-btn {
+    border: 1px solid rgb(10, 10, 10);
+    border-radius: 9px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.active-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.active-icon {
+    color: #007bff;
+}
+
+.custom-template-group {
+    display: flex;
+    justify-content: center;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+@media screen and (max-width:992px) {
+    .mobileDesign {
+        display: flex;
+        flex-direction: column !important;
+        gap: 10px;
+        margin-top: 10px !important;
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: flex-start !important;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .mobileflexdir {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .mobilePad {
+        padding: 10px !important;
+    }
+
+    .drag-area {
+        border: 1px dashed black;
+        border-radius: 5px;
+        height: 138.2px;
+        width: 200px !important;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .eventDateTimes-fields {
+        flex-direction: row;
+        margin: 47px 10px 10px 10px !important;
+    }
+
+    .custom-editor-btnGroup {
+        flex-direction: row !important;
+    }
+
+    .moibleRow {
+        flex-direction: row !important;
+    }
+
+
+}
+
+@media (min-width:776px) and (max-width:1023px) {
+    .resForm {
+        font-size: 11px !important;
+        width: 100px !important;
+        height: 40px !important;
+    }
+}

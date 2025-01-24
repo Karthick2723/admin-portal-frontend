@@ -1,0 +1,69 @@
+table {
+  width: 100%;
+}
+
+.row-spacing {
+  margin-bottom: 10px;
+}
+
+.edit_icon {
+  margin-bottom: 07px;
+  margin-left: -12px;
+}
+
+@media only screen and (max-width: 420px) {
+  .edit_icon {
+    margin-bottom: 8px;
+    margin-left: -13px;
+  }
+}
+
+.linklogo {
+  position: relative;
+  display: inline-block;
+}
+
+.linklogo .tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+
+.linklogo:hover .tooltiptext {
+  visibility: visible;
+}
+
+.linklogo .tooltiptext {
+  width: 80px;
+  top: 121%;
+  left: 50%;
+  font-size: 11px;
+  background-color: #676464;
+  margin-left: -40px;
+}
+
+@media screen and (max-width:992px) {
+  .mobileDesignSet {
+    justify-content: space-between !important;
+  }
+
+  .mobileFlex {
+    flex-direction: column !important;
+  }
+
+  .mobileFlex {
+    display: contents !important;
+  }
+
+  .mobileFlexPara {
+    padding-left: 0px !important;
+    font-size: 16px !important;
+  }
+}
